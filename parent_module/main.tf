@@ -3,6 +3,12 @@ module "resource_group" {
   rg_name     = "dream-rg"
   rg_location = "centralindia"
 }
+module "resource_group01" {
+  source      = "../child_module/resource_group"
+  rg_name     = "love-rg"
+  rg_location = "centralindia"
+}
+
 module "public_ip_frontend" {
   depends_on        = [module.resource_group]
   source            = "../child_module/public_ip"
@@ -69,6 +75,7 @@ module "virtual_machine_backend" {
   vnet_name   = "amol-vnet"
   os_disk_name = "backend-osdisk"
 }
+
 module "key_vault" {
   depends_on  = [module.resource_group, ]
   source      = "../child_module/key_vault"
